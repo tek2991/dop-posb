@@ -24,6 +24,17 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             OfficeTypeSeeder::class,
             OfficeSeeder::class,
+            RoleSeeder::class,
         ]);
+
+        // Create admin user
+        $admin = \App\Models\User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@test.com',
+        ]);
+
+        $adminRole = \App\Models\Role::where('name', 'admin')->first();
+
+        $admin->update(['role_id' => $adminRole->id]);
     }
 }
