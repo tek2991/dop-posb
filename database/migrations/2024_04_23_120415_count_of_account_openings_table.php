@@ -25,6 +25,10 @@ return new class extends Migration
             $table->integer('mssc')->default(0);
             $table->integer('nsc')->default(0);
             $table->integer('kvp')->default(0);
+            // Date
+            $table->timestamps();
+            // Month
+            $table->timestamp('month')->useCurrent();
         });
     }
 
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('count_of_account_openings');
     }
 };

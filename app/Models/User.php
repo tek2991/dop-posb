@@ -30,6 +30,7 @@ class User extends Authenticatable implements FilamentUser
         'password',
         'division_id',
         'role_id',
+        'office_id'
     ];
 
     /**
@@ -62,8 +63,18 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Division::class);
     }
 
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
+
     public function isAdmin()
     {
         return $this->role->name === 'admin';
+    }
+
+    public function isDivisionalUser()
+    {
+        return $this->role->name === 'divisional_user';
     }
 }

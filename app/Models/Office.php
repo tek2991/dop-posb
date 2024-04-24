@@ -18,6 +18,11 @@ class Office extends Model
         return $this->belongsTo(OfficeType::class);
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
     // Default Offices
     public static function defaultOffices()
     {

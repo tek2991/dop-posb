@@ -35,6 +35,9 @@ class UserResource extends Resource
                 Forms\Components\Select::make('division_id')
                     ->relationship('division', 'name')
                     ->required(),
+                Forms\Components\Select::make('office_id')
+                    ->relationship('office', 'name')
+                    ->required(),
                 Forms\Components\Select::make('role_id')
                     ->relationship('role', 'name')
                     ->required(),
@@ -67,6 +70,10 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('division.name')
                     ->label('Division')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('office.name')
+                    ->label('Office')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('role.name')
