@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('division_id')->nullable()->constrained();
+        Schema::create('sub_divisions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->foreignId('division_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -21,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['division_id']);
-            $table->dropColumn('division_id');
-        });
+        Schema::dropIfExists('sub_divisions');
     }
 };

@@ -21,6 +21,7 @@ class CountOfAccountOpening extends Model
         'kvp',
 
         'month',
+        'financial_year_id'
     ];
 
     protected $casts = [
@@ -35,5 +36,10 @@ class CountOfAccountOpening extends Model
     public function office()
     {
         return $this->belongsTo(Office::class);
+    }
+
+    public function financialYear()
+    {
+        return $this->belongsTo(FinancialYear::class);
     }
 }

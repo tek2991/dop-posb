@@ -43,7 +43,7 @@ class CountOfAccountOpeningResource extends Resource
 
                                 // If divisional user then allow only offices of his division
                                 if (auth()->user()->isDivisionalUser()) {
-                                    if (auth()->user()->division_id != $value) {
+                                    if (auth()->user()->division_id != \App\Models\Office::find($value)->division_id) {
                                         $fail('You can only select office of your division');
                                     }
                                     return;
@@ -99,6 +99,9 @@ class CountOfAccountOpeningResource extends Resource
                 Forms\Components\DatePicker::make('month')
                     ->helperText('Select the first day of the month')
                     ->native(false)
+                    ->required(),
+                Forms\Components\Hidden::make('financial_year_id')
+                    ->default(1)
                     ->required(),
                 ]);
     }

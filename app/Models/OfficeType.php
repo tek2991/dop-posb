@@ -18,7 +18,8 @@ class OfficeType extends Model
     {
         return [
             'Head Office',
-            'Sub Division',
+            'Sub Office',
+            'Branch Office',
         ];
     }
 }
