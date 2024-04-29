@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('sub_division_id')->constrained();
             $table->foreignId('division_id')->constrained();
             $table->foreignId('office_type_id')->constrained(); 
             $table->timestamps();
