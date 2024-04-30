@@ -9,8 +9,11 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use App\Models\CountOfAccountOpening;
+use Filament\Tables\Actions\ExportAction;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\ExportBulkAction;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Exports\CountOfAccountOpeningExporter;
 use Coolsam\FilamentFlatpickr\Forms\Components\Flatpickr;
 use App\Filament\Resources\CountOfAccountOpeningResource\Pages;
 use App\Filament\Resources\CountOfAccountOpeningResource\RelationManagers;
@@ -174,6 +177,14 @@ class CountOfAccountOpeningResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+                // ExportBulkAction::make()
+                // ->exporter(CountOfAccountOpeningExporter::class)
+                // ->columnMapping(false)
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(CountOfAccountOpeningExporter::class)
+                    ->columnMapping(false)
             ]);
     }
 
