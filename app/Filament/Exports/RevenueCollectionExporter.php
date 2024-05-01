@@ -25,6 +25,21 @@ class RevenueCollectionExporter extends Exporter
             ExportColumn::make('posb_net'),
             ExportColumn::make('certificates_net'),
             ExportColumn::make('mssc_net'),
+            ExportColumn::make('posb_revenue_₹')
+                ->state(function (RevenueCollection $record) {
+                    return $record->posb_net * \App\Models\PosbRate::current()->first()->posb_in_cents / 100;
+                }),
+
+            ExportColumn::make('certificates_revenue ₹')
+                ->state(function (RevenueCollection $record) {
+                    return $record->certificates_net * \App\Models\PosbRate::current()->first()->certificates_in_cents / 100;
+                }),
+
+            ExportColumn::make('mssc_revenue_₹')
+                ->state(function (RevenueCollection $record) {
+                    return $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents / 100;
+                }),
+
             ExportColumn::make('month'),
         ];
     }

@@ -105,19 +105,19 @@ class RevenueCollectionResource extends Resource
                     ->numeric()
                     ->sortable(),
                 // Posb calculation
-                Tables\Columns\TextColumn::make('posb_revenue')
+                Tables\Columns\TextColumn::make('posb_rev_(₹)')
                     ->state(function(RevenueCollection $record) {
-                        return 'Rs ' . $record->posb_net * \App\Models\PosbRate::current()->first()->posb_in_cents/100;
+                        return $record->posb_net * \App\Models\PosbRate::current()->first()->posb_in_cents/100;
                     }),
                 // Certificates calculation
-                Tables\Columns\TextColumn::make('certificates_revenue')
+                Tables\Columns\TextColumn::make('certificates_rev_(₹)')
                     ->state(function(RevenueCollection $record) {
-                        return 'Rs ' . $record->certificates_net * \App\Models\PosbRate::current()->first()->certificates_in_cents/100;
+                        return $record->certificates_net * \App\Models\PosbRate::current()->first()->certificates_in_cents/100;
                     }),
                 // Mssc calculation
-                Tables\Columns\TextColumn::make('mssc_revenue')
+                Tables\Columns\TextColumn::make('mssc_rev_(₹)')
                     ->state(function(RevenueCollection $record) {
-                        return 'Rs ' . $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents/100;
+                        return $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents/100;
                     }),
                 Tables\Columns\TextColumn::make('month')
                     ->date()
