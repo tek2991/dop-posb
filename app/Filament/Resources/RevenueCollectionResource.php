@@ -23,12 +23,37 @@ class RevenueCollectionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('office_id')
+                Forms\Components\Hidden::make('user_id')
+                    ->default(auth()->id())
+                    ->required(),
+                Forms\Components\Select::make('office_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
+                    ->relationship('office', 'name')
+                    // ->searchable()
+                    ->placeholder('Select Office')
+                    ->rules([
+                        function () {
+                            return function (string $attribute, $value, Closure $fail) {
+                                // If admin then allow all office
+                                if (auth()->user()->isAdmin()) {
+                                    return;
+                                }
+
+                                // If divisional user then allow only offices of his division
+                                if (auth()->user()->isDivisionalUser()) {
+                                    if (auth()->user()->division_id != \App\Models\Office::find($value)->division_id) {
+                                        $fail('You can only select office of your division');
+                                    }
+                                    return;
+                                }
+
+                                // If office user then allow only his office
+                                if (auth()->user()->office_id != $value) {
+                                    $fail('You can only select your office');
+                                }
+                            };
+                        },
+                    ]),
                 Forms\Components\TextInput::make('posb_net')
                     ->required()
                     ->numeric()
@@ -41,6 +66,10 @@ class RevenueCollectionResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
+                Forms\Components\DatePicker::make('month')
+                    ->helperText('Select the first day of the month')
+                    ->native(false)
+                    ->required(),
             ]);
     }
 
@@ -48,11 +77,21 @@ class RevenueCollectionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('office_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('User')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('office.name')
+                    ->label('Office')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('office.division.name')
+                    ->label('Division')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('office.officeType.name')
+                    ->label('Office Type')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('posb_net')
                     ->numeric()
@@ -63,14 +102,9 @@ class RevenueCollectionResource extends Resource
                 Tables\Columns\TextColumn::make('mssc_net')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('month')
+                    ->date()
+                    ->sortable(),
             ])
             ->filters([
                 //

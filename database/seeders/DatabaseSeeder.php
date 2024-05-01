@@ -37,5 +37,10 @@ class DatabaseSeeder extends Seeder
         $adminRole = \App\Models\Role::where('name', 'admin')->first();
 
         $admin->update(['role_id' => $adminRole->id]);
+
+        $this->call([
+            CountOfAccountOpeningSeeder::class,
+            RevenueCollectionSeeder::class,
+        ]);
     }
 }

@@ -14,10 +14,14 @@ class CountOfAccountOpeningExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label('ID'),
-            ExportColumn::make('user_id'),
-            ExportColumn::make('office_id'),
+            ExportColumn::make('user.name')
+                ->label('User'),
+            ExportColumn::make('office.name')
+                ->label('Office'),
+            ExportColumn::make('office.division.name')
+                ->label('Division'),
+            ExportColumn::make('office.officeType.name')
+                ->label('Office Type'),
             ExportColumn::make('sb'),
             ExportColumn::make('rd'),
             ExportColumn::make('mis'),
@@ -28,10 +32,7 @@ class CountOfAccountOpeningExporter extends Exporter
             ExportColumn::make('mssc'),
             ExportColumn::make('nsc'),
             ExportColumn::make('kvp'),
-            ExportColumn::make('created_at'),
-            ExportColumn::make('updated_at'),
-            ExportColumn::make('month'),
-            ExportColumn::make('financial_year_id'),
+            ExportColumn::make('month')
         ];
     }
 

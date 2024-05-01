@@ -120,7 +120,14 @@ class CountOfAccountOpeningResource extends Resource
                 Tables\Columns\TextColumn::make('office.name')
                     ->label('Office')
                     ->searchable()
-
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('office.division.name')
+                    ->label('Division')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('office.officeType.name')
+                    ->label('Office Type')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sb')
                     ->numeric()
@@ -168,6 +175,9 @@ class CountOfAccountOpeningResource extends Resource
                 Tables\Filters\SelectFilter::make('office_id')
                     ->options(fn () => \App\Models\Office::pluck('name', 'id')->toArray())
                     ->label('Office'),
+                Tables\Filters\SelectFilter::make('office.division_id')
+                    ->options(fn () => \App\Models\Division::pluck('name', 'id')->toArray())
+                    ->label('Division'),
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),

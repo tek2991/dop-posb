@@ -19,7 +19,6 @@ class CountOfAccountOpening extends Model
         'mssc',
         'nsc',
         'kvp',
-
         'month',
         'financial_year_id'
     ];

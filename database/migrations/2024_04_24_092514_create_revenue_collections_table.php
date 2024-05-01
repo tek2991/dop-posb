@@ -19,7 +19,10 @@ return new class extends Migration
             $table->integer('certificates_net')->default(0);
             $table->integer('mssc_net')->default(0);
             $table->foreignId('financial_year_id')->nullable()->constrained();
+            // Date
             $table->timestamps();
+            // Month
+            $table->timestamp('month')->useCurrent();
         });
     }
 
