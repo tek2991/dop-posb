@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\RevenueCollection;
+use Filament\Tables\Actions\ExportAction;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Exports\RevenueCollectionExporter;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RevenueCollectionResource\Pages;
 use App\Filament\Resources\RevenueCollectionResource\RelationManagers;
-use App\Models\RevenueCollection;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RevenueCollectionResource extends Resource
 {
@@ -102,21 +104,46 @@ class RevenueCollectionResource extends Resource
                 Tables\Columns\TextColumn::make('mssc_net')
                     ->numeric()
                     ->sortable(),
+                // Posb calculation
+                Tables\Columns\TextColumn::make('posb_revenue')
+                    ->state(function(RevenueCollection $record) {
+                        return 'Rs ' . $record->posb_net * \App\Models\PosbRate::current()->first()->posb_in_cents/100;
+                    }),
+                // Certificates calculation
+                Tables\Columns\TextColumn::make('certificates_revenue')
+                    ->state(function(RevenueCollection $record) {
+                        return 'Rs ' . $record->certificates_net * \App\Models\PosbRate::current()->first()->certificates_in_cents/100;
+                    }),
+                // Mssc calculation
+                Tables\Columns\TextColumn::make('mssc_revenue')
+                    ->state(function(RevenueCollection $record) {
+                        return 'Rs ' . $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents/100;
+                    }),
                 Tables\Columns\TextColumn::make('month')
                     ->date()
                     ->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('office_id')
+                    ->options(fn () => \App\Models\Office::pluck('name', 'id')->toArray())
+                    ->label('Office'),
+                Tables\Filters\SelectFilter::make('office.division_id')
+                    ->options(fn () => \App\Models\Division::pluck('name', 'id')->toArray())
+                    ->label('Division'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(RevenueCollectionExporter::class)
+                    ->columnMapping(false)
             ]);
     }
 
