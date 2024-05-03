@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -14,6 +15,7 @@ use App\Filament\Exports\RevenueCollectionExporter;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RevenueCollectionResource\Pages;
 use App\Filament\Resources\RevenueCollectionResource\RelationManagers;
+use Coolsam\FilamentFlatpickr\Forms\Components\Flatpickr;
 
 class RevenueCollectionResource extends Resource
 {
@@ -68,10 +70,13 @@ class RevenueCollectionResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\DatePicker::make('month')
+                // Forms\Components\DatePicker::make('month')
+                //     ->helperText('Select the first day of the month')
+                //     ->native(false)
+                //     ->required(),
+                Flatpickr::make('month')
+                    ->monthSelect()
                     ->helperText('Select the first day of the month')
-                    ->native(false)
-                    ->required(),
             ]);
     }
 
@@ -120,8 +125,9 @@ class RevenueCollectionResource extends Resource
                         return $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents/100;
                     }),
                 Tables\Columns\TextColumn::make('month')
-                    ->date()
-                    ->sortable(),
+                    ->state(function(RevenueCollection $record) {
+                        return $record->month->format('F Y');
+                    })
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('office_id')

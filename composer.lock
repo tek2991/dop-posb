@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "751733fa24de602d9637e6cca724468b",
+    "content-hash": "c77948afb0c7c78f7bd4cb92576a2315",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -348,16 +348,16 @@
         },
         {
             "name": "coolsam/flatpickr",
-            "version": "v3.1.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/savannabits/filament-flatpickr.git",
-                "reference": "67f88f078fe39df24ecf2883a781f69fdb6fc4b3"
+                "reference": "3a0af9fcba5088acc73405f79496dea8a573ed54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/savannabits/filament-flatpickr/zipball/67f88f078fe39df24ecf2883a781f69fdb6fc4b3",
-                "reference": "67f88f078fe39df24ecf2883a781f69fdb6fc4b3",
+                "url": "https://api.github.com/repos/savannabits/filament-flatpickr/zipball/3a0af9fcba5088acc73405f79496dea8a573ed54",
+                "reference": "3a0af9fcba5088acc73405f79496dea8a573ed54",
                 "shasum": ""
             },
             "require": {
@@ -379,6 +379,7 @@
                 "phpstan/phpstan-phpunit": "^1.0",
                 "spatie/laravel-ray": "^1.26"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -416,9 +417,9 @@
             ],
             "support": {
                 "issues": "https://github.com/savannabits/filament-flatpickr/issues",
-                "source": "https://github.com/savannabits/filament-flatpickr/tree/v3.1.0"
+                "source": "https://github.com/savannabits/filament-flatpickr/tree/3.x"
             },
-            "time": "2024-03-21T12:14:34+00:00"
+            "time": "2024-04-17T18:32:07+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
@@ -10232,7 +10233,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "coolsam/flatpickr": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

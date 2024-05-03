@@ -40,7 +40,10 @@ class RevenueCollectionExporter extends Exporter
                     return $record->mssc_net * \App\Models\PosbRate::current()->first()->mssc_in_cents / 100;
                 }),
 
-            ExportColumn::make('month'),
+            ExportColumn::make('month')
+                ->state(function(RevenueCollection $revenueCollection) {
+                    return $revenueCollection->month->format('F Y');
+                })
         ];
     }
 

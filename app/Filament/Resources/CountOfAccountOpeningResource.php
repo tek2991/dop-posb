@@ -99,10 +99,9 @@ class CountOfAccountOpeningResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\DatePicker::make('month')
-                    ->helperText('Select the first day of the month')
-                    ->native(false)
-                    ->required(),
+                Flatpickr::make('month')
+                    ->monthSelect()
+                    ->helperText('Select the first day of the month'),
                 Forms\Components\Hidden::make('financial_year_id')
                     ->default(1)
                     ->required(),
@@ -168,8 +167,9 @@ class CountOfAccountOpeningResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('month')
-                    ->date()
-                    ->sortable(),
+                    ->state(function(CountOfAccountOpening $record) {
+                        return $record->month->format('F Y');
+                    })
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('office_id')

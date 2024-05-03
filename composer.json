@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "coolsam/flatpickr": "^3.1",
+        "coolsam/flatpickr": " 3.x-dev#3a0af9fcba5088acc73405f79496dea8a573ed54",
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",

@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             OfficeSeeder::class,
             RoleSeeder::class,
             FinancialYearSeeder::class,
+            PosbRateSeeder::class,
+            TargetSeeder::class,
         ]);
 
         // Create admin user

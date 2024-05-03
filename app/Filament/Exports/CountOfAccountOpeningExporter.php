@@ -33,6 +33,9 @@ class CountOfAccountOpeningExporter extends Exporter
             ExportColumn::make('nsc'),
             ExportColumn::make('kvp'),
             ExportColumn::make('month')
+            ->state(function(CountOfAccountOpening $countOfAccountOpening) {
+                return $countOfAccountOpening->month->format('F Y');
+            })
         ];
     }
 
