@@ -36,7 +36,6 @@ class CountOfAccountOpeningSeeder extends Seeder
                     'nsc' => rand(1, 100),
                     'kvp' => rand(1, 100),
                     'month' => $date,
-                    'financial_year_id' => \App\Models\FinancialYear::first()->id,
                 ]);
             });
         });

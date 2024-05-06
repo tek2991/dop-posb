@@ -43,7 +43,12 @@ class RevenueCollectionExporter extends Exporter
             ExportColumn::make('month')
                 ->state(function(RevenueCollection $revenueCollection) {
                     return $revenueCollection->month->format('F Y');
-                })
+                }),
+            ExportColumn::make('target')
+                ->label('F.Y Target')
+                ->state(function(RevenueCollection $record) {
+                    return $record->FinancialYearTarget();
+                }),
         ];
     }
 

@@ -37,8 +37,19 @@ class CountOfAccountOpening extends Model
         return $this->belongsTo(Office::class);
     }
 
-    public function financialYear()
+    public function FinancialYearTarget()
     {
-        return $this->belongsTo(FinancialYear::class);
+        $financial_year = FinancialYear::where('start_date', '<=', $this->month)
+            ->where('end_date', '>=', $this->month)
+            ->first();
+
+        $target = Target::where('office_id', $this->office_id)
+            ->where('start_date', $financial_year->start_date)
+            ->where('end_date', $financial_year->end_date)
+            ->first();
+
+        $target = $target ? $target->total_account_opening : 0;
+
+        return $target;
     }
 }

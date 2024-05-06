@@ -168,7 +168,13 @@ class CountOfAccountOpeningResource extends Resource
                 Tables\Columns\TextColumn::make('month')
                     ->state(function(CountOfAccountOpening $record) {
                         return $record->month->format('F Y');
-                    })
+                    }),
+                // Target of Current Financial Year
+                Tables\Columns\TextColumn::make('target')
+                    ->label('F.Y Target')
+                    ->state(function(CountOfAccountOpening $record) {
+                        return $record->FinancialYearTarget();
+                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('office_id')

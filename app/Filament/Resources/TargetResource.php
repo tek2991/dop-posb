@@ -23,6 +23,7 @@ class TargetResource extends Resource
     public static function form(Form $form): Form
     {
         $current_financial_year = \App\Models\FinancialYear::current()->first();
+
         return $form
             ->schema([
                 Forms\Components\Hidden::make('user_id')
@@ -31,7 +32,6 @@ class TargetResource extends Resource
                 Forms\Components\Select::make('office_id')
                     ->required()
                     ->relationship('office', 'name')
-                    // ->searchable()
                     ->placeholder('Select Office')
                     ->rules([
                         function () {

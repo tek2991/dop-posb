@@ -29,8 +29,6 @@ return new class extends Migration
             $table->timestamps();
             // Month
             $table->timestamp('month')->useCurrent();
-
-            $table->foreignId('financial_year_id')->nullablew()->constrained();
         });
     }
 

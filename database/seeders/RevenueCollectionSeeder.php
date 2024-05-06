@@ -29,7 +29,6 @@ class RevenueCollectionSeeder extends Seeder
                     'certificates_net' => rand(51, 250),
                     'mssc_net' => rand(51, 250),
                     'month' => $date,
-                    'financial_year_id' => \App\Models\FinancialYear::first()->id,
                 ]);
             });
         });
