@@ -25,11 +25,18 @@ class PosbRateResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $current_financial_year = \App\Models\FinancialYear::current()->first();
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('start_date')
+                    ->default($current_financial_year->start_date)
+                    ->helperText('Locked to current financial year start date.')
+                    ->readOnly()
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
+                    ->default($current_financial_year->end_date)
+                    ->helperText('Locked to current financial year end date.')
+                    ->readOnly()
                     ->required(),
                 Forms\Components\TextInput::make('posb_in_cents')
                     ->required()

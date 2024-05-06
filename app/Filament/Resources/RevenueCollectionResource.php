@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use Closure;
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Target;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -13,9 +14,9 @@ use Filament\Tables\Actions\ExportAction;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Exports\RevenueCollectionExporter;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Coolsam\FilamentFlatpickr\Forms\Components\Flatpickr;
 use App\Filament\Resources\RevenueCollectionResource\Pages;
 use App\Filament\Resources\RevenueCollectionResource\RelationManagers;
-use Coolsam\FilamentFlatpickr\Forms\Components\Flatpickr;
 
 class RevenueCollectionResource extends Resource
 {
@@ -136,6 +137,10 @@ class RevenueCollectionResource extends Resource
                 Tables\Filters\SelectFilter::make('office.division_id')
                     ->options(fn () => \App\Models\Division::pluck('name', 'id')->toArray())
                     ->label('Division'),
+                    Tables\Filters\SelectFilter::make('Targets')
+                    ->options([
+                        
+                    ])
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),

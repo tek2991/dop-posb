@@ -21,6 +21,7 @@ class TargetResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $current_financial_year = \App\Models\FinancialYear::current()->first();
         return $form
             ->schema([
                 Forms\Components\Hidden::make('user_id')
@@ -55,8 +56,14 @@ class TargetResource extends Resource
                         },
                     ]),
                 Forms\Components\DatePicker::make('start_date')
+                    ->default($current_financial_year->start_date)
+                    ->hyperText('Locked to current financial year start date.')
+                    ->readOnly()
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
+                    ->default($current_financial_year->end_date)
+                    ->hyperText('Locked to current financial year end date.')
+                    ->readOnly()
                     ->required(),
                 Forms\Components\TextInput::make('total_revenue_target_in_cents')
                     ->required()
