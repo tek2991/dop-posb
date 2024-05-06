@@ -14,8 +14,8 @@ class RevenueCollectionExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('user.name')
-                ->label('User'),
+            // ExportColumn::make('user.name')
+            //     ->label('User'),
             ExportColumn::make('office.name')
                 ->label('Office'),
             ExportColumn::make('office.division.name')
@@ -48,6 +48,11 @@ class RevenueCollectionExporter extends Exporter
                 ->label('F.Y Target')
                 ->state(function(RevenueCollection $record) {
                     return $record->FinancialYearTarget();
+                }),
+            ExportColumn::make('total_revenue')
+                ->label('Total Revenue')
+                ->state(function(RevenueCollection $record) {
+                    return $record->totalRevenue();
                 }),
         ];
     }

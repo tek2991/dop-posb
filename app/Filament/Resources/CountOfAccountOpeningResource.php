@@ -175,6 +175,12 @@ class CountOfAccountOpeningResource extends Resource
                     ->state(function(CountOfAccountOpening $record) {
                         return $record->FinancialYearTarget();
                     }),
+                
+                Tables\Columns\TextColumn::make('total_revenue')
+                    ->label('Total Account Opening')
+                    ->state(function(CountOfAccountOpening $record) {
+                        return $record->totalAccountOppening();
+                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('office_id')

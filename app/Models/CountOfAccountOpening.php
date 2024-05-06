@@ -52,4 +52,9 @@ class CountOfAccountOpening extends Model
 
         return $target;
     }
+
+    public function totalAccountOppening()
+    {
+        return $this->sb + $this->rd + $this->mis + $this->ppf + $this->scss + $this->ssa + $this->td + $this->mssc + $this->nsc + $this->kvp;
+    }
 }

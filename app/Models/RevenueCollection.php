@@ -42,4 +42,9 @@ class RevenueCollection extends Model
 
         return $target;
     }
+
+    public function totalRevenue()
+    {
+        return $this->posb_net + $this->certificates_net + $this->mssc_net;
+    }
 }

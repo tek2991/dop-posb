@@ -134,6 +134,12 @@ class RevenueCollectionResource extends Resource
                     ->state(function(RevenueCollection $record) {
                         return $record->FinancialYearTarget();
                     }),
+                // Total Revenue
+                Tables\Columns\TextColumn::make('total_revenue')
+                    ->label('Total Revenue')
+                    ->state(function(RevenueCollection $record) {
+                        return $record->totalRevenue();
+                    }),
 
             ])
             ->filters([

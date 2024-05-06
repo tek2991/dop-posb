@@ -14,8 +14,8 @@ class CountOfAccountOpeningExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('user.name')
-                ->label('User'),
+            // ExportColumn::make('user.name')
+            //     ->label('User'),
             ExportColumn::make('office.name')
                 ->label('Office'),
             ExportColumn::make('office.division.name')
@@ -40,6 +40,11 @@ class CountOfAccountOpeningExporter extends Exporter
                 ->label('F.Y Target')
                 ->state(function(CountOfAccountOpening $record) {
                     return $record->FinancialYearTarget();
+                }),
+            ExportColumn::make('total_revenue')
+                ->label('Total Account Opening')
+                ->state(function(CountOfAccountOpening $record) {
+                    return $record->totalAccountOppening();
                 }),
         ];
     }
