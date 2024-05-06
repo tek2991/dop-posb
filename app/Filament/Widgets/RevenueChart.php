@@ -4,19 +4,25 @@ namespace App\Filament\Widgets;
 
 use App\Models\Office;
 use App\Models\Division;
+use App\Models\PosbRate;
 use App\Models\OfficeType;
+use App\Models\RevenueCollection;
 use Filament\Widgets\ChartWidget;
-use App\Models\CountOfAccountOpening;
 
-class CountChart extends ChartWidget
+class RevenueChart extends ChartWidget
 {
-    protected static ?int $sort = 2;
+    protected static ?string $heading = 'Revenue Collection in Divisions';
 
-    protected static ?string $heading = 'Account Opened in Divisions';
+    protected static ?int $sort = 3;
 
     protected function getData(): array
     {
-        $types_of_accounts = ['sb', 'rd', 'mis', 'ppf', 'scss', 'ssa', 'td', 'mssc', 'nsc', 'kvp',];
+        $rates = PosbRate::current()->first();
+        $types_of_accounts = [
+            'posb' => $rates->posb_in_cents / 100,
+            'certificates' => $rates->certificates_in_cents / 100,
+            'mssc' => $rates->mssc_in_cents / 100,
+        ];
 
         $datasets = [];
 
@@ -46,8 +52,8 @@ class CountChart extends ChartWidget
                 $data_count = 0;
 
                 if($division->id == $office->division_id) {
-                    foreach($types_of_accounts as $type) {
-                        $data_count += CountOfAccountOpening::where('office_id', $office->id)->sum($type);
+                    foreach($types_of_accounts as $type => $rate) {
+                        $data_count += RevenueCollection::where('office_id', $office->id)->sum($type . '_net') * $rate;
                     }
                     if($current_div_id == $division->id) {
                         $loop_count++;

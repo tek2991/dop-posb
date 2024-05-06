@@ -8,6 +8,8 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class CountOverview extends BaseWidget
 {
+    protected static ?int $sort = 1;
+    
     protected function getStats(): array
     {
         return [
