@@ -77,7 +77,6 @@ class RevenueCollectionResource extends Resource
                 //     ->required(),
                 Flatpickr::make('month')
                     ->monthSelect()
-                    ->helperText('Select the first day of the month')
             ]);
     }
 

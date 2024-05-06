@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             FinancialYearSeeder::class,
             PosbRateSeeder::class,
-            TargetSeeder::class,
+            // TargetSeeder::class,
         ]);
 
         // Create admin user
@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
         $admin->update(['role_id' => $adminRole->id]);
 
         $this->call([
-            CountOfAccountOpeningSeeder::class,
-            RevenueCollectionSeeder::class,
+            // CountOfAccountOpeningSeeder::class,
+            // RevenueCollectionSeeder::class,
         ]);
     }
 }

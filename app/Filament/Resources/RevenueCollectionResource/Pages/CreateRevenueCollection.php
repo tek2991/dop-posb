@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateRevenueCollection extends CreateRecord
 {
     protected static string $resource = RevenueCollectionResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
 }

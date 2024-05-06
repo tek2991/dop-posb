@@ -66,37 +66,7 @@ class User extends Authenticatable implements FilamentUser
     
     public function division()
     {
-        // If no office is assigned to the user, then the division will be null
-        if($this->office == null) {
-            return null;
-        }
-
-        // If Office has a division, then return the division
-        if($this->office->division != null) {
-            return $this->office->division;
-        }
-
-        // If Office has no division, then return the division of the sub-division
-        if($this->office->subDivision != null) {
-            return $this->office->subDivision->division;
-        }
-
-        return null;
-    }
-
-    public function subDivision()
-    {
-        // If no office is assigned to the user, then the sub-division will be null
-        if($this->office == null) {
-            return null;
-        }
-
-        // If Office has a sub-division, then return the sub-division
-        if($this->office->subDivision != null) {
-            return $this->office->subDivision;
-        }
-
-        return null;
+        return $this->belongsTo(Division::class);
     }
 
     public function isAdmin()

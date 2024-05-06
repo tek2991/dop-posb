@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('office_id')->nullable()->constrained();
+            $table->foreignId('division_id')->nullable()->constrained();
         });
     }
 
@@ -24,6 +25,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['office_id']);
             $table->dropColumn('office_id');
+
+            $table->dropForeign(['division_id']);
+            $table->dropColumn('division_id');
         });
     }
 };

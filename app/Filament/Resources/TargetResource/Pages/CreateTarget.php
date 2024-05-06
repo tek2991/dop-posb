@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTarget extends CreateRecord
 {
     protected static string $resource = TargetResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
 }

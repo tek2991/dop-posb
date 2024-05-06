@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use App\Filament\Resources\TargetResource\Pages;
 use App\Filament\Resources\TargetResource\RelationManagers;
 use App\Models\Target;
