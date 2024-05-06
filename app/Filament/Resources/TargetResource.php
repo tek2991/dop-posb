@@ -57,12 +57,12 @@ class TargetResource extends Resource
                     ]),
                 Forms\Components\DatePicker::make('start_date')
                     ->default($current_financial_year->start_date)
-                    ->hyperText('Locked to current financial year start date.')
+                    ->helperText('Locked to current financial year start date.')
                     ->readOnly()
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
                     ->default($current_financial_year->end_date)
-                    ->hyperText('Locked to current financial year end date.')
+                    ->helperText('Locked to current financial year end date.')
                     ->readOnly()
                     ->required(),
                 Forms\Components\TextInput::make('total_revenue_target_in_cents')
