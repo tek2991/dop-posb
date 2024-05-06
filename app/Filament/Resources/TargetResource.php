@@ -26,9 +26,6 @@ class TargetResource extends Resource
 
         return $form
             ->schema([
-                Forms\Components\Hidden::make('user_id')
-                    ->default(auth()->id())
-                    ->required(),
                 Forms\Components\Select::make('office_id')
                     ->required()
                     ->relationship('office', 'name')
