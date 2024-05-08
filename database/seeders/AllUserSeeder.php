@@ -33,7 +33,7 @@ class AllUserSeeder extends Seeder
             ['name' => 'Dhan Nath', 'email' => 'dhannath123@gmail.com', 'sub_division' => 'Dhubri Sub Division'],
             ['name' => 'Victor Narzinary', 'email' => 'narjinary.victor@gmail.com', 'sub_division' => 'Kokrajhar Sub Division'],
             ['name' => 'Rahul Jajra', 'email' => 'rahuljajra02@gmail.com', 'sub_division' => 'Bongaigaon Sub Division'],
-            ['name' => ' Sri Motilal Sah', 'email' => 'sdoghyeast.as@indiapost.gov.in', 'sub_division' => 'Guwahati East Sub Division'],
+            ['name' => 'Sri Motilal Sah', 'email' => 'sdoghyeast.as@indiapost.gov.in', 'sub_division' => 'Guwahati East Sub Division'],
             ['name' => 'Sri Pappulal Meena', 'email' => 'sdoghywest.as@indiapost.gov.in', 'sub_division' => 'Guwahati West Sub Division'],
             ['name' => 'Sri Hemanta Barman', 'email' => 'sdobijoynagar.as@indiapost.gov.in', 'sub_division' => 'Bijoynagar Sub Division'],
             ['name' => 'KAIYUM AZAD', 'email' => 'kaiyumzad5@gmail.com', 'sub_division' => 'Nagaon East Sub Division'],
