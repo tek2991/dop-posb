@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $admin = \App\Models\User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@test.com',
+            'password' => bcrypt('Dop@781171'),
         ]);
 
         $adminRole = \App\Models\Role::where('name', 'admin')->first();
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // CountOfAccountOpeningSeeder::class,
             // RevenueCollectionSeeder::class,
+            AllUserSeeder::class,
         ]);
     }
 }
