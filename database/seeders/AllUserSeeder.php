@@ -57,15 +57,27 @@ class AllUserSeeder extends Seeder
 
         $user_role_id = \App\Models\Role::where('name', 'user')->first()->id;
         $common_pwd = bcrypt('Dop@781xx1');
+        $offices = \App\Models\Office::with('division')->get();
+
+        $data = [];
 
         foreach ($users as $user) {
-            $um = \App\Models\User::factory()->create([
+            $office = $offices->where('name', $user['sub_division'])->first();
+            $division = $office->division;
+            $data[] = [
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => $common_pwd,
-            ]);
+                'role_id' => $user_role_id,
+                'office_id' => $office->id,
+                'division_id' => $division->id,
 
-            $um->update(['role_id' => $user_role_id]);
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+
+        \App\Models\User::insert($data);
     }
 }
