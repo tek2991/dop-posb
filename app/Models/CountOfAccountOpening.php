@@ -20,7 +20,6 @@ class CountOfAccountOpening extends Model
         'nsc',
         'kvp',
         'month',
-        'financial_year_id'
     ];
 
     protected $casts = [

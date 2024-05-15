@@ -101,9 +101,6 @@ class CountOfAccountOpeningResource extends Resource
                     ->default(0),
                 Flatpickr::make('month')
                     ->monthSelect(),
-                Forms\Components\Hidden::make('financial_year_id')
-                    ->default(1)
-                    ->required(),
                 ]);
     }
 
