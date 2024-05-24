@@ -45,6 +45,12 @@ class RevenueCollection extends Model
 
     public function totalRevenue()
     {
-        return $this->posb_net + $this->certificates_net + $this->mssc_net;
+        $posb_rates = PosbRate::current()->first();
+
+        $posb = $this->posb_net * $posb_rates->posb_in_cents/100;
+        $certificates = $this->certificates_net * $posb_rates->certificates_in_cents/100;
+        $mssc = $this->mssc_net * $posb_rates->mssc_in_cents/100;
+
+        return $posb + $certificates + $mssc;
     }
 }
