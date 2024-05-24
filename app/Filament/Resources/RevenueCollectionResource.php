@@ -64,6 +64,7 @@ class RevenueCollectionResource extends Resource
                     ->numeric()
                     ->default(0),
                 Forms\Components\TextInput::make('certificates_net')
+                    ->label('Certificates (Issued + Discharged)')
                     ->required()
                     ->numeric()
                     ->default(0),
